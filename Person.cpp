@@ -20,7 +20,7 @@ void Person::createPerson()
 void Person::savePerson()
 {
     std::ofstream file;
-    file.open("people.txt");
+    file.open("users.db", std::ios::out | std::ios::app);
     file << username << " "
          << password << " "
          << email << "\n";
@@ -35,7 +35,7 @@ void Person::addTrip()
 
     std::string filename;
     filename = username;
-    filename.append(".txt");
+    filename.append(".db");
     t.serTrip(filename);
 }
 
