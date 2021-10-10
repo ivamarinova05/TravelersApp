@@ -52,3 +52,20 @@ void Person::printPerson()
     }
     std::cout << std::endl;
 }
+
+void Person::loadPerson(std::string _username, std::string _password, std::string _email)
+{
+    username = _username;
+    password = _password;
+    email = _email;
+    std::fstream file;
+    _username.append(".db");
+    file.open(_username, std::ios::in);
+    while (file)
+    {
+        Trip newTrip;
+        newTrip.loadTrip(file);
+        trips.push_back(newTrip);
+    }
+    file.close();
+}

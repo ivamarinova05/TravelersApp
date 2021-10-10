@@ -9,8 +9,9 @@ void CLR::signup()
     newPerson.createPerson();
 }
 
-void CLR::signin()
+Person CLR::signin()
 {
+    Person user;
     std::string username, password, ignore;
     std::cout << "Username: ";
     std::cin >> username;
@@ -18,7 +19,7 @@ void CLR::signin()
     std::cin >> password;
     std::ifstream file;
     file.open("users.db", std::ios::in);
-    std::string _username, _password;
+    std::string _username, _password, _email;
     while (file)
     {
         file >> _username;
@@ -28,6 +29,9 @@ void CLR::signin()
             if (_password.compare(password) == 0)
             {
                 std::cout << "You have successfully signed in!\n";
+                file >> _email;
+                
+                user.loadPerson(_username, _password, _email);
                 file.close();
                 break;
                 //load files?
@@ -47,9 +51,6 @@ void CLR::signin()
             signin();
         }
         getline (file, ignore);
-        //file >> _username;
-        //file >> _username;
     }
-
-
+    return user;
 }

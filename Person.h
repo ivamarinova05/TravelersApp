@@ -18,6 +18,7 @@ class Person
     void printPerson();
     void addTrip();
     void savePerson();
+    void loadPerson(std::string, std::string, std::string);
 
 };
 

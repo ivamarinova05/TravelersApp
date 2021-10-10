@@ -43,3 +43,16 @@ void Trip::serTrip(std::string filename)
     file.close(); 
 
 }
+
+void Trip::loadTrip(std::fstream& in)
+{
+    std::string ignore;
+    in >> destination;
+    getline(in, ignore);
+    getline(in, timePeriod);
+    in >>grade;
+    getline(in,ignore);
+    getline(in, notes);
+    getline(in, images);
+
+}

@@ -12,9 +12,12 @@ int main()
     p.addTrip();
     p.addTrip();
     //p.printPerson();*/
+    Person p;
     CLR c;
     //c.signup();
-    c.signin();
+    p = c.signin();
+    p.printPerson();
+
 
     return 0;
 }
