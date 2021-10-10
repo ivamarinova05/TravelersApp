@@ -8,7 +8,7 @@ class CLR
     private:
 
     public:
-    void signup();
+    Person signup();
     Person signin();
 
 

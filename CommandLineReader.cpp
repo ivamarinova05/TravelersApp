@@ -3,10 +3,11 @@
 #include <iostream>
 #include <fstream>
 
-void CLR::signup()
+Person CLR::signup()
 {
-    Person newPerson;
-    newPerson.createPerson();
+    Person user;
+    user.createPerson();
+    return user;
 }
 
 Person CLR::signin()

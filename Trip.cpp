@@ -47,8 +47,7 @@ void Trip::serTrip(std::string filename)
 void Trip::loadTrip(std::fstream& in)
 {
     std::string ignore;
-    in >> destination;
-    getline(in, ignore);
+    getline(in, destination);
     getline(in, timePeriod);
     in >>grade;
     getline(in,ignore);
