@@ -1,18 +1,17 @@
-#include "CommandLineReader.h"
+#include "Session.h"
 #include "Person.h"
 #include <iostream>
 #include <fstream>
 
-Person CLR::signup()
+Person Session::signup()
 {
     Person user;
     user.createPerson();
     return user;
 }
 
-Person CLR::signin()
+Person& Session::signin(Person& user)
 {
-    Person user;
     std::string username, password, ignore;
     std::cout << "Username: ";
     std::cin >> username;
@@ -31,17 +30,16 @@ Person CLR::signin()
             {
                 std::cout << "You have successfully signed in!\n";
                 file >> _email;
-                
                 user.loadPerson(_username, _password, _email);
                 file.close();
-                break;
-                //load files?
+                return user;
             }
             else
             {
                 std::cout << "Wrong password!\n";
                 file.close();
-                signin();
+                signin(user);
+                return user;
             }
             
         }
@@ -49,7 +47,8 @@ Person CLR::signin()
         {
             std::cout << "Wrong username!\n";
             file.close();
-            signin();
+            signin(user);
+            return user;
         }
         getline (file, ignore);
     }

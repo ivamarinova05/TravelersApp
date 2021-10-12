@@ -1,0 +1,17 @@
+#ifndef __Session_H_
+#define __Session_H_
+
+#include "Person.h"
+
+class Session
+{
+    private:
+
+    public:
+    Person signup();
+    Person& signin(Person&);
+
+
+
+};
+#endif

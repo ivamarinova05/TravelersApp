@@ -67,5 +67,6 @@ void Person::loadPerson(std::string _username, std::string _password, std::strin
         newTrip.loadTrip(file);
         trips.push_back(newTrip);
     }
+    trips.pop_back(); //sort that out like wtf
     file.close();
 }
