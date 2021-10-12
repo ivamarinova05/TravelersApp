@@ -12,6 +12,8 @@ class Person
     std::string password;
     std::string email;
     std::vector<Trip> trips;
+    std::vector<std::string> notifications;
+    std::vector<std::string> friends;
 
     public:
     void createPerson();
@@ -19,7 +21,10 @@ class Person
     void addTrip();
     void savePerson();
     void loadPerson(std::string, std::string, std::string);
+    void viewNotifications();
+    void acceptFriend(std::string);
 
+    std::string getName() const;
 };
 
 #endif

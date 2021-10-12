@@ -10,6 +10,7 @@ class Session
     public:
     Person signup();
     Person& signin(Person&);
+    void addRequest(std::string, std::string);
 
 
 

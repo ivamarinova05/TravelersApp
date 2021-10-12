@@ -25,6 +25,7 @@ void Person::savePerson()
          << password << " "
          << email << "\n";
     file.close();
+
 }
 
 void Person::addTrip()
@@ -61,6 +62,8 @@ void Person::loadPerson(std::string _username, std::string _password, std::strin
     std::fstream file;
     _username.append(".db");
     file.open(_username, std::ios::in);
+
+    //load trips
     if (file)
     {
         while (file)
@@ -72,5 +75,77 @@ void Person::loadPerson(std::string _username, std::string _password, std::strin
         trips.pop_back(); //sort that out like wtf
         file.close();
     }
+
+    //load friends
+    _username = username;
+    _username.append("_freinds.txt");
+    file.open(_username, std::ios::in);
+    if (file)
+    {
+        std::string user;
+        file << user;
+        while(file)
+        {
+            friends.push_back(user);
+        }
+    }
+    file.close();
+
+    //load notifications
+    _username = username;
+    _username.append("_notifications.txt");
+    file.open(_username, std::ios::in);
+    if(file)
+    {
+       while(file)
+        {
+            std::string message;
+            getline(file, message);
+            notifications.push_back(message);
+        } 
+    }
+    
+    
+    size_t count = 0;
+    if (notifications.size() != 0)
+    {
+        count = notifications.size() - 1;
+    }
+    //maybe check here if notifications.size() == 0
+    std::cout << "Hello, " << username 
+              << "! You have " << count  
+              << " new notifications.\n Type view to see them.\n";
 }
+
+void Person::viewNotifications()
+{
+    if (notifications.size() == 0)
+    {
+        std::cout << "No new notifications.\n";
+    }
+    for (std::string s : notifications)
+    {
+        std::cout << s << "\n" ;
+    }
+    notifications.clear();
+}
+
+void Person::acceptFriend(std::string user)
+{
+    //validate requests
+    std::string _username = username;
+    friends.push_back(user);
+    _username.append("_friends.txt");
+    std::fstream file;
+    file.open(_username, std::ios::out | std::ios::app);
+    file << user << " ";
+    file.close();
+    std::cout << "You and " << user << " are friends now!\n";
+}
+
+std::string Person::getName() const
+{
+    return this->username;
+}
+
     

@@ -33,7 +33,6 @@ Person& Session::signin(Person& user)
             file >> _password;
             if (_password == password )
             {
-                std::cout << "You have successfully signed in!\n";
                 file >> _email;
                 user.loadPerson(_username, _password, _email);
                 file.close();
@@ -56,4 +55,12 @@ Person& Session::signin(Person& user)
     file.close();
     signin(user);
     return user;   
+}
+
+void Session::addRequest(std::string sender, std::string reciever)
+{
+    reciever.append("_notifications.txt");
+    std::fstream file;
+    file.open(reciever, std::ios::out | std::ios::app);
+    file << "You have a new friend request from " << sender << ".\n";
 }

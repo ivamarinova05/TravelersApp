@@ -38,12 +38,30 @@ void CLR::read()
         {
             user.addTrip();
         }
+        else if (command == "friend_request")
+        {
+            std::string reciever;
+            std::cin >> reciever;
+            currentSession.addRequest(user.getName(), reciever);
+            std::cout << "Your request has been sent to " << reciever << ".\n";
+        }
+        else if (command == "view")
+        {
+            user.viewNotifications();
+        }
+        //accepting requests
+        else if (command == "accept")
+        {
+            std::string name;
+            std::cin >> name;
+            user.acceptFriend(name);
+        }
         else if (command != "exit")
         {
             std::cout << "Invalid command!\n";
         }
         getline(std::cin, ignore);
-        
+        //save everything when user exits
     }
 
 }
