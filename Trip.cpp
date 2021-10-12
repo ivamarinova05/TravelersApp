@@ -1,14 +1,13 @@
 #include "Trip.h"
-
 #include <iostream>
 #include <fstream>
 
 void Trip::addTrip()
 {
     std::string ignore;
-    std::cout << "Input destination: ";
-    std::cin >> destination;
     getline(std::cin, ignore);
+    std::cout << "Input destination: ";
+    getline(std::cin, destination);
     std::cout << "Input time period: ";
     getline(std::cin, timePeriod);
     std::cout << "How would you grade this destination: ";
@@ -18,6 +17,7 @@ void Trip::addTrip()
     getline(std::cin, notes);
     std::cout << "Add some images: ";
     getline(std::cin, images);
+    getline(std::cin, ignore);
     //check images
 }
 

@@ -61,12 +61,16 @@ void Person::loadPerson(std::string _username, std::string _password, std::strin
     std::fstream file;
     _username.append(".db");
     file.open(_username, std::ios::in);
-    while (file)
+    if (file)
     {
-        Trip newTrip;
-        newTrip.loadTrip(file);
-        trips.push_back(newTrip);
+        while (file)
+        {
+            Trip newTrip;
+            newTrip.loadTrip(file);
+            trips.push_back(newTrip);
+        }
+        trips.pop_back(); //sort that out like wtf
+        file.close();
     }
-    trips.pop_back(); //sort that out like wtf
-    file.close();
 }
+    
