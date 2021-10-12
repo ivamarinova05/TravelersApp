@@ -38,6 +38,7 @@ Person& Session::signin(Person& user)
             {
                 std::cout << "Wrong password!\n";
                 file.close();
+                //ask if they want to continue
                 signin(user);
                 return user;
             }
