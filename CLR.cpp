@@ -45,8 +45,14 @@ void CLR::read()
         {
             std::string reciever;
             std::cin >> reciever;
-            currentSession.addRequest(user.getName(), reciever);
-            std::cout << "Your request has been sent to " << reciever << ".\n";
+            if (Validation::existingUser(reciever))
+            {
+                currentSession.addRequest(user.getName(), reciever);
+            }
+            else 
+            {
+                std::cout << "There is no user with the name " << reciever << ".\n";
+            }   
         }
         else if (command == "view")
         {

@@ -9,6 +9,7 @@ class Validation
 
     public:
     static bool validateRequest(std::string, std::string);
+    static bool existingUser (std::string);
 
 };
 

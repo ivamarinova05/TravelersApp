@@ -23,3 +23,20 @@ bool Validation::validateRequest(std::string sender, std::string reciever)
     }
     return false;
 }
+
+bool Validation::existingUser(std::string name)
+{
+    std::fstream file;
+    file.open("users.db", std::ios::in);
+    while (file)
+    {
+        std::string user, ignore;
+        file >> user;
+        if (user == name)
+        {
+            return true;
+        }
+        getline (file, ignore);
+    }
+    return false;
+}

@@ -59,10 +59,27 @@ Person& Session::signin(Person& user)
 
 void Session::addRequest(std::string sender, std::string reciever)
 {
-    reciever.append("_notifications.txt");
+    //check if they are friends already
+    std::string _sender = sender;
+    _sender.append("_friends.txt");
     std::fstream file;
-    file.open(reciever, std::ios::out | std::ios::app);
+    file.open(_sender, std::ios::in);
+    while (file)
+    {
+        std::string user;
+        file >> user;
+        if (user == reciever)
+        {
+            std::cout << "You and " << reciever << " are friends already!\n";
+            return;
+        }
+    }
+    file.close();
+    std::string _reciever = reciever;
+    _reciever.append("_notifications.txt");
+    file.open(_reciever, std::ios::out | std::ios::app);
     file << "You have a new friend request from " << sender << ".\n";
+    std::cout << "Your request has been sent to " << reciever << ".\n";
 }
 
 void Session::addFriend(std::string sender, std::string reciever)
@@ -73,6 +90,7 @@ void Session::addFriend(std::string sender, std::string reciever)
     file.open(_sender, std::ios::out | std::ios::app);
     file << reciever << " ";
     file.close();
+    
     _sender = sender;
     _sender.append("_notifications.txt");
     file.open(_sender, std::ios::out | std::ios::app);

@@ -88,10 +88,6 @@ void Person::loadPerson(std::string _username, std::string _password, std::strin
             file >> user;
             friends.push_back(user);
         }
-        for (std::string s : friends)
-        {
-            std::cout << s << "\n";
-        }
     }
     file.close();
     
