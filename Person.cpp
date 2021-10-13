@@ -38,6 +38,12 @@ void Person::addTrip()
     filename = username;
     filename.append(".db");
     t.serTrip(filename);
+
+    std::fstream file;
+    std::string destination = t.getDestination();
+    destination.append(".db");
+    file.open(destination, std::ios::out | std::ios::app);
+    file << username << ": " << t.getNotes() << " " << t.getGrade() <<"\n";
 }
 
 

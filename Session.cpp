@@ -2,6 +2,7 @@
 #include "Person.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 Person Session::signup()
 {
@@ -90,12 +91,42 @@ void Session::addFriend(std::string sender, std::string reciever)
     file.open(_sender, std::ios::out | std::ios::app);
     file << reciever << " ";
     file.close();
-    
+
     _sender = sender;
     _sender.append("_notifications.txt");
     file.open(_sender, std::ios::out | std::ios::app);
     file << "You and " << reciever << " are friends now!\n";
     file.close();
+}
 
+void Session::review(std::string destination)
+{
+    double score = 0;
+    double counter = 0;
+    destination.append(".db");
+    destination.erase(0,1);
+    std::fstream file;
+    file.open(destination, std::ios::in);
+    while(file)
+    {
+        std::string review;
+        getline(file, review);
+        if (!review.empty())
+        {
+           int num;
+            std::stringstream currScore;
+            currScore << review.back();
+            currScore >> num;
+            counter++;
+            score += num;
 
+            std::cout << "here ";
+
+            review.pop_back();
+            std::cout << review << "\n"; 
+        }
+
+             
+    }
+    std::cout << "Our users graded this place: " << score/counter << "/5.\n";
 }

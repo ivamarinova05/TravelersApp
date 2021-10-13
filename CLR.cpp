@@ -91,6 +91,15 @@ void CLR::read()
             }
             
         }
+        //reviws of destinations
+        else if (command == "review")
+        {
+            std::string destination;
+            getline (std::cin, destination);
+            currentSession.review(destination);
+            getline(std::cin, ignore);
+
+        }
 
 
         else if (command != "exit")

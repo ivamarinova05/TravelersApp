@@ -1,4 +1,5 @@
 #include "Trip.h"
+#include "Validation.h"
 #include <iostream>
 #include <fstream>
 
@@ -19,6 +20,16 @@ void Trip::addTrip()
     getline(std::cin, images);
     getline(std::cin, ignore);
     //check images
+
+    //save destination in the database of destinations
+    if ( Validation::newDestination(destination))
+    {
+        std::fstream file;
+        file.open("destinations.db", std::ios::out | std::ios::app);
+        file << destination << "\n";
+        file.close();
+    }
+    
 }
 
 void Trip::printTrip()
@@ -54,4 +65,19 @@ void Trip::loadTrip(std::fstream& in)
     getline(in, notes);
     getline(in, images);
 
+}
+
+std::string Trip::getDestination() const
+{
+    return destination;
+}
+
+std::string Trip::getNotes() const
+{
+    return notes;
+}
+
+size_t Trip::getGrade() const
+{
+    return grade;
 }

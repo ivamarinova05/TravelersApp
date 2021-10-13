@@ -20,6 +20,9 @@ class Trip
     void printTrip();
     void serTrip(std::string);
     void loadTrip(std::fstream&);
+    std::string getDestination() const;
+    std::string getNotes() const;
+    size_t getGrade() const;
 
 };
 
