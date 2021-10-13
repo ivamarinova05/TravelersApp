@@ -99,8 +99,10 @@ void Session::addFriend(std::string sender, std::string reciever)
     file.close();
 }
 
-void Session::review(std::string destination)
+void Session::review(std::string destination, Person& user)
 {
+    std::vector<std::string> reviews;
+
     double score = 0;
     double counter = 0;
     destination.append(".db");
@@ -120,13 +122,49 @@ void Session::review(std::string destination)
             counter++;
             score += num;
 
-            std::cout << "here ";
 
-            review.pop_back();
-            std::cout << review << "\n"; 
+            review.pop_back(); 
+            reviews.push_back(review);
         }
 
              
     }
+    
+    std::vector<std::string> friendsReviews;
+    std::vector<std::string> otherReviews;
+    for (std::string review : reviews)
+    {
+        //get the name of the person who wrote the review
+        auto index = review.find_first_of(':');
+        std::string name = review.substr(0, index); 
+
+        if(user.isFriend(name))
+        {
+            friendsReviews.push_back(review);
+        }
+        else
+        {
+            otherReviews.push_back(review);
+        }
+        
+    }
+
+    if(!friendsReviews.empty())
+    {
+        std::cout << "What your friends tought of this destination:\n";
+        for (std::string review : friendsReviews)
+        {
+            std::cout << review << "\n";
+        }
+        std::cout << "Other people tought: \n";
+    }
+
+    for (std::string review : otherReviews)
+    {
+        std::cout << review << "\n";
+    }
+
     std::cout << "Our users graded this place: " << score/counter << "/5.\n";
+
+
 }

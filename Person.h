@@ -23,6 +23,8 @@ class Person
     void loadPerson(std::string, std::string, std::string);
     void viewNotifications();
     void acceptFriend(std::string);
+    void eraseNotifications();
+    bool isFriend(std::string);
 
     std::string getName() const;
 };

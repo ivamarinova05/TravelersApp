@@ -12,7 +12,7 @@ class Session
     Person& signin(Person&);
     void addRequest(std::string, std::string);
     void addFriend(std::string, std::string);
-    void review(std::string);
+    void review(std::string, Person&);
 
 
 

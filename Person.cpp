@@ -50,8 +50,6 @@ void Person::addTrip()
 void Person::printPerson()
 {
     std::cout << "\nUsername: " << username
-              << "\nPassword: " << password
-              << "\nEmail: " << email
               << "\nTrips:\n";
     for (Trip t : trips)
     {
@@ -136,12 +134,17 @@ void Person::viewNotifications()
     }
     notifications.clear();
 
+
+}
+
+void Person::eraseNotifications()
+{
     //empty the file with notifications
-    /*std::fstream file;
+    std::fstream file;
     std::string _username = username;
     _username.append("_notifications.txt");
     file.open(_username, std::ios::out | std::ios::trunc);
-    file.close();*/
+    file.close();
 
 }
 
@@ -155,6 +158,18 @@ void Person::acceptFriend(std::string user)
     file << user << " ";
     file.close();
     std::cout << "You and " << user << " are friends now!\n";
+}
+
+bool Person::isFriend(std::string name)
+{
+    for (std::string user : friends)
+    {
+        if(user == name)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 std::string Person::getName() const

@@ -57,6 +57,7 @@ void CLR::read()
         else if (command == "view")
         {
             user.viewNotifications();
+            //user.eraseNotifications();
         }
 
         //accepting requests
@@ -96,7 +97,7 @@ void CLR::read()
         {
             std::string destination;
             getline (std::cin, destination);
-            currentSession.review(destination);
+            currentSession.review(destination, user);
             getline(std::cin, ignore);
 
         }
