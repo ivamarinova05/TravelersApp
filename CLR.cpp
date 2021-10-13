@@ -3,6 +3,7 @@
 #include <string>
 #include "Person.h"
 #include "Session.h"
+#include "Validation.h"
 
 void CLR::read()
 {
@@ -13,6 +14,7 @@ void CLR::read()
     
     do
     {
+        //signing in/up in the app before using it
         std::cin >> command;
         if (command == "sign_in")
         {
@@ -32,8 +34,9 @@ void CLR::read()
     {
         std::cout << ">_";
         std::cin >> command;
-        //once they sign in or sign up they shouldn't be able to do it again unless they log out.
+
         //logging out
+
         if (command == "add_destination")
         {
             user.addTrip();
@@ -49,13 +52,41 @@ void CLR::read()
         {
             user.viewNotifications();
         }
+
         //accepting requests
         else if (command == "accept")
         {
             std::string name;
             std::cin >> name;
-            user.acceptFriend(name);
+            if (Validation::validateRequest(name, user.getName()))
+            {
+                user.acceptFriend(name);
+                currentSession.addFriend(name, user.getName());
+            }
+            else
+            {
+                std::cout << "You have no friend request from " << name << ". Use friend_request to send one!\n";
+            }
+            
+            
         }
+
+        else if (command == "decline")
+        {
+            std::string name;
+            std::cin >> name;
+            if (Validation::validateRequest(name, user.getName()))
+            {
+                std::cout << "You have declined the friend request from " << name << ".\n";
+            }
+            else
+            {
+                std::cout << "You have no friend request from " << name << ".\n";
+            }
+            
+        }
+
+
         else if (command != "exit")
         {
             std::cout << "Invalid command!\n";

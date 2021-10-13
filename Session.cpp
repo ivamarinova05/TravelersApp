@@ -64,3 +64,20 @@ void Session::addRequest(std::string sender, std::string reciever)
     file.open(reciever, std::ios::out | std::ios::app);
     file << "You have a new friend request from " << sender << ".\n";
 }
+
+void Session::addFriend(std::string sender, std::string reciever)
+{
+    std::fstream file;
+    std::string _sender = sender;
+    _sender.append("_friends.txt");
+    file.open(_sender, std::ios::out | std::ios::app);
+    file << reciever << " ";
+    file.close();
+    _sender = sender;
+    _sender.append("_notifications.txt");
+    file.open(_sender, std::ios::out | std::ios::app);
+    file << "You and " << reciever << " are friends now!\n";
+    file.close();
+
+
+}

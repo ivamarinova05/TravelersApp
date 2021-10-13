@@ -78,18 +78,23 @@ void Person::loadPerson(std::string _username, std::string _password, std::strin
 
     //load friends
     _username = username;
-    _username.append("_freinds.txt");
+    _username.append("_friends.txt");
     file.open(_username, std::ios::in);
     if (file)
     {
-        std::string user;
-        file << user;
         while(file)
         {
+            std::string user;
+            file >> user;
             friends.push_back(user);
+        }
+        for (std::string s : friends)
+        {
+            std::cout << s << "\n";
         }
     }
     file.close();
+    
 
     //load notifications
     _username = username;
@@ -128,11 +133,18 @@ void Person::viewNotifications()
         std::cout << s << "\n" ;
     }
     notifications.clear();
+
+    //empty the file with notifications
+    /*std::fstream file;
+    std::string _username = username;
+    _username.append("_notifications.txt");
+    file.open(_username, std::ios::out | std::ios::trunc);
+    file.close();*/
+
 }
 
 void Person::acceptFriend(std::string user)
 {
-    //validate requests
     std::string _username = username;
     friends.push_back(user);
     _username.append("_friends.txt");

@@ -11,6 +11,7 @@ class Session
     Person signup();
     Person& signin(Person&);
     void addRequest(std::string, std::string);
+    void addFriend(std::string, std::string);
 
 
 
