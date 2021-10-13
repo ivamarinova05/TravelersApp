@@ -58,16 +58,13 @@ void Person::printPerson()
     std::cout << std::endl;
 }
 
-void Person::loadPerson(std::string _username, std::string _password, std::string _email)
+void Person::loadTrips()
 {
-    username = _username;
-    password = _password;
-    email = _email;
+    std::string _username = username;
     std::fstream file;
     _username.append(".db");
     file.open(_username, std::ios::in);
 
-    //load trips
     if (file)
     {
         while (file)
@@ -80,8 +77,12 @@ void Person::loadPerson(std::string _username, std::string _password, std::strin
         file.close();
     }
 
-    //load friends
-    _username = username;
+}
+
+void Person::loadFriends()
+{
+    std::fstream file;
+    std::string _username = username;
     _username.append("_friends.txt");
     file.open(_username, std::ios::in);
     if (file)
@@ -94,10 +95,13 @@ void Person::loadPerson(std::string _username, std::string _password, std::strin
         }
     }
     file.close();
-    
 
-    //load notifications
-    _username = username;
+}
+
+void Person::loadNotifications()
+{
+    std::fstream file;
+    std::string _username = username;
     _username.append("_notifications.txt");
     file.open(_username, std::ios::in);
     if(file)
@@ -109,7 +113,22 @@ void Person::loadPerson(std::string _username, std::string _password, std::strin
             notifications.push_back(message);
         } 
     }
-    
+}
+
+void Person::loadPersonalData(std::string _username, std::string _password, std::string _email)
+{
+    username = _username;
+    password = _password;
+    email = _email;
+}
+
+void Person::loadPerson(std::string _username, std::string _password, std::string _email)
+{
+    this->loadPersonalData(_username, _password, _email);
+
+    this->loadTrips();
+    this->loadFriends();
+    this->loadNotifications();
     
     size_t count = 0;
     if (notifications.size() != 0)

@@ -20,7 +20,13 @@ class Person
     void printPerson();
     void addTrip();
     void savePerson();
+
     void loadPerson(std::string, std::string, std::string);
+    void loadPersonalData(std::string, std::string, std::string);
+    void loadTrips();
+    void loadFriends();
+    void loadNotifications();
+    
     void viewNotifications();
     void acceptFriend(std::string);
     void eraseNotifications();

@@ -13,6 +13,7 @@ class Session
     void addRequest(std::string, std::string);
     void addFriend(std::string, std::string);
     void review(std::string, Person&);
+    void showProfile(std::string);
 
 
 

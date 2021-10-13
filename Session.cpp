@@ -168,3 +168,11 @@ void Session::review(std::string destination, Person& user)
 
 
 }
+
+void Session::showProfile(std::string name)
+{
+    Person user;
+    user.loadPersonalData(name, "", "");
+    user.loadTrips();
+    user.printPerson();
+}
