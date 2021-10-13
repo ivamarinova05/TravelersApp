@@ -15,6 +15,7 @@ class Person
     std::vector<std::string> notifications;
     std::vector<std::string> friends;
 
+
     public:
     void createPerson();
     void printPerson();
@@ -26,10 +27,11 @@ class Person
     void loadTrips();
     void loadFriends();
     void loadNotifications();
-    
+
     void viewNotifications();
     void acceptFriend(std::string);
-    void eraseNotifications();
+    void eraseNotification(std::string);
+    void eraseNotification();
     bool isFriend(std::string);
 
     std::string getName() const;

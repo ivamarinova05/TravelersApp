@@ -20,6 +20,7 @@ class CLR
     void accept();
     void decline();
     void review();
+    void view();
 
 
 };

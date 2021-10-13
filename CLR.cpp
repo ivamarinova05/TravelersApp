@@ -8,7 +8,7 @@
 void CLR::read()
 {
     
-    std::string command, ignore;
+    std::string ignore;
     std::cout << "Welcome! Please type sign_in or sign_up to log into the app!\n>_";
     this->logging();
     
@@ -27,7 +27,7 @@ void CLR::read()
         }
         else if (command == "view")
         {
-            user.viewNotifications();
+            this->view();
             //user.eraseNotifications();
         }
 
@@ -68,7 +68,11 @@ void CLR::logging()
     {
         //signing in/up in the app before using it
         std::cin >> command;
-        if (command == "sign_in")
+        if (command == "exit")
+        {
+            return;
+        }
+        else if (command == "sign_in")
         {
             user = currentSession.signin(user);
         }
@@ -105,6 +109,7 @@ void CLR::accept()
     {
         user.acceptFriend(name);
         currentSession.addFriend(name, user.getName());
+        user.eraseNotification(name);
     }
     else
     {
@@ -119,6 +124,10 @@ void CLR::decline()
     if (Validation::validateRequest(name, user.getName()))
     {
         std::cout << "You have declined the friend request from " << name << ".\n";
+        std::string toDelete = "You have a new friend request from ";
+        toDelete.append(name);
+        toDelete.append(".");
+        user.eraseNotification(toDelete);
     }
     else
     {
@@ -146,6 +155,13 @@ void CLR::profile()
     {
         std::cout << "There is no user with the name " << username << ".\n";
     }
+}
+
+void CLR::view()
+{
+    user.viewNotifications();
+    user.eraseNotification();
+    
 }
 
 void CLR::review()

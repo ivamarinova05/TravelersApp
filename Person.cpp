@@ -104,15 +104,11 @@ void Person::loadNotifications()
     std::string _username = username;
     _username.append("_notifications.txt");
     file.open(_username, std::ios::in);
-    if(file)
+    std::string message;
+    while(getline(file, message))
     {
-       while(file)
-        {
-            std::string message;
-            getline(file, message);
-            notifications.push_back(message);
-        } 
-    }
+        notifications.push_back(message);
+    } 
 }
 
 void Person::loadPersonalData(std::string _username, std::string _password, std::string _email)
@@ -156,15 +152,52 @@ void Person::viewNotifications()
 
 }
 
-void Person::eraseNotifications()
+void Person::eraseNotification(std::string toDelete)
 {
-    //empty the file with notifications
-    std::fstream file;
+    std::fstream file, temp;
+    std::string line;
+
     std::string _username = username;
     _username.append("_notifications.txt");
-    file.open(_username, std::ios::out | std::ios::trunc);
+    file.open(_username, std::ios::in);
+    temp.open("temp.txt", std::ios::out);
+    
+    while(getline(file, line))
+    {
+        if(line != toDelete)
+        {
+            temp << line << "\n";
+        }
+    }
     file.close();
+    temp.close();
+    remove(_username.c_str());
+    rename("temp.txt", _username.c_str());
 
+}
+
+void Person::eraseNotification()
+{
+    std::fstream file, temp;
+    std::string line;
+
+    std::string _username = username;
+    _username.append("_notifications.txt");
+    file.open(_username, std::ios::in);
+    temp.open("temp.txt", std::ios::out);
+    
+    while(getline(file, line))
+    {
+        if(line.substr(0,3) != "You")
+        {
+            temp << line << "\n";
+        }
+    }
+    file.close();
+    temp.close();
+    remove(_username.c_str());
+    rename("temp.txt", _username.c_str());
+    
 }
 
 void Person::acceptFriend(std::string user)
@@ -176,7 +209,7 @@ void Person::acceptFriend(std::string user)
     file.open(_username, std::ios::out | std::ios::app);
     file << user << " ";
     file.close();
-    std::cout << "You and " << user << " are friends now!\n";
+    std::cout <<"You and " << user << " are friends now!\n";
 }
 
 bool Person::isFriend(std::string name)

@@ -95,7 +95,7 @@ void Session::addFriend(std::string sender, std::string reciever)
     _sender = sender;
     _sender.append("_notifications.txt");
     file.open(_sender, std::ios::out | std::ios::app);
-    file << "You and " << reciever << " are friends now!\n";
+    file << "You and " <<reciever << " are friends now!\n";
     file.close();
 }
 
