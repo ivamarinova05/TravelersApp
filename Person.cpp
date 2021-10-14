@@ -190,7 +190,7 @@ void Person::eraseNotification()
     
     while(getline(file, line))
     {
-        if(line.substr(0,8) != "You and")
+        if(line.substr(0,7) != "You and")
         {
             temp << line << "\n";
         }

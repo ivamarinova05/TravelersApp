@@ -119,7 +119,10 @@ void CLR::accept()
     {
         user.acceptFriend(name);
         currentSession.addFriend(name, user.getName());
-        user.eraseNotification(name);
+        std::string toDelete = "You have a new friend request from ";
+        toDelete.append(name);
+        toDelete.append(".");
+        user.eraseNotification(toDelete);
     }
     else
     {
@@ -184,15 +187,16 @@ void CLR::review()
 void CLR::help()
 {
     std::cout << "The app supports the following functions:\n" 
-              << "sign_in                 --> log in your profile using your username and password.\n" 
-              << "sign_up                 --> create a new account.\n"
-              << "friend_request user     --> sends a friend request to that user.\n"
-              << "view                    --> see your notifications - you will be notified when\n"  
-              << "                            you get a friend request or when someone accepts your request.\n"
-              << "accept user             --> accept the friend request by that user.\n"
-              << "decline user            --> decline the friend request by that user.\n"
-              << "add_destination         --> add a new destination to your profile.\n"
-              << "profile user            --> see the profile of that user. Note that you can only see the profiles of your friends.\n"
-              << "exit                    --> logs you out of the app.\n>_";
+              << "sign_in                   --> log in your profile using your username and password.\n" 
+              << "sign_up                   --> create a new account.\n"
+              << "friend_request <user>     --> sends a friend request to that user.\n"
+              << "view                      --> see your notifications - you will be notified when\n"  
+              << "                              you get a friend request or when someone accepts your request.\n"
+              << "accept <user>             --> accept the friend request by that user.\n"
+              << "decline <user>            --> decline the friend request by that user.\n"
+              << "add_destination           --> add a new destination to your profile.\n"
+              << "profile <user>            --> see the profile of that user. Note that you can only see the profiles of your friends.\n"
+              << "review <destination>      --> see reviews for that destination\n"
+              << "exit                      --> logs you out of the app.\n";
 
 }
