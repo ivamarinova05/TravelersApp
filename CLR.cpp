@@ -9,7 +9,8 @@ void CLR::read()
 {
     
     std::string ignore;
-    std::cout << "Welcome! Please type sign_in or sign_up to log into the app!\n>_";
+    std::cout << "Welcome! Please type sign_in or sign_up to log into the app!\n"
+              << "If you need help using the app please type help!\n>_";
     this->logging();
     
     while (command != "exit")
@@ -53,6 +54,11 @@ void CLR::read()
             this->profile();  
         }
 
+        else if (command == "help")
+        {
+            this->help();
+        }
+
         else if (command != "exit")
         {
             std::cout << "Invalid command!\n";
@@ -71,6 +77,10 @@ void CLR::logging()
         if (command == "exit")
         {
             return;
+        }
+        else if (command == "help")
+        {
+            this->help();
         }
         else if (command == "sign_in")
         {
@@ -169,4 +179,20 @@ void CLR::review()
     std::string destination;
     getline (std::cin, destination);
     currentSession.review(destination, user);
+}
+
+void CLR::help()
+{
+    std::cout << "The app supports the following functions:\n" 
+              << "sign_in                 --> log in your profile using your username and password.\n" 
+              << "sign_up                 --> create a new account.\n"
+              << "friend_request user     --> sends a friend request to that user.\n"
+              << "view                    --> see your notifications - you will be notified when\n"  
+              << "                            you get a friend request or when someone accepts your request.\n"
+              << "accept user             --> accept the friend request by that user.\n"
+              << "decline user            --> decline the friend request by that user.\n"
+              << "add_destination         --> add a new destination to your profile.\n"
+              << "profile user            --> see the profile of that user. Note that you can only see the profiles of your friends.\n"
+              << "exit                    --> logs you out of the app.\n>_";
+
 }

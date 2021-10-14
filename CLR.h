@@ -21,6 +21,7 @@ class CLR
     void decline();
     void review();
     void view();
+    void help();
 
 
 };

@@ -103,26 +103,32 @@ void Session::addFriend(std::string sender, std::string reciever)
 void Session::review(std::string destination, Person& user)
 {
     std::vector<std::string> reviews;
+    destination.erase(0,1);
+    std::string _destination = destination;
 
     double score = 0;
     double counter = 0;
     destination.append(".db");
-    destination.erase(0,1);
     std::fstream file;
     file.open(destination, std::ios::in);
+    if(!file)
+    {
+        std::cout << "There are currently no reviews for " << _destination << ".\n";
+        return;
+    }
     while(file)
     {
         std::string review;
         getline(file, review);
-        if (!review.empty())
+        if (!review.empty() && review.substr(0, user.getName().size()) != user.getName())
         {
-           int num;
+            
+            int num;
             std::stringstream currScore;
             currScore << review.back();
             currScore >> num;
             counter++;
             score += num;
-
 
             review.pop_back(); 
             reviews.push_back(review);
@@ -133,6 +139,8 @@ void Session::review(std::string destination, Person& user)
     
     std::vector<std::string> friendsReviews;
     std::vector<std::string> otherReviews;
+    
+
     for (std::string review : reviews)
     {
         //get the name of the person who wrote the review
@@ -148,6 +156,12 @@ void Session::review(std::string destination, Person& user)
             otherReviews.push_back(review);
         }
         
+    }
+
+    if(friendsReviews.empty() && otherReviews.empty())
+    {
+        std::cout << "There are currently no reviews other than yours for " << _destination << ".\n";
+        return;
     }
 
     if(!friendsReviews.empty())
