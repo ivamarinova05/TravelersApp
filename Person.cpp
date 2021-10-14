@@ -5,14 +5,18 @@
 
 void Person::createPerson()
 {
+    //the function is used to register a new person into the system
     std::string ignore;
     std::cout << "Input username: ";
     std::cin >> username;
+
     while(!Validation::uniqueUser(username))
     {
+        //the user can't sign up if the username is already taken
         std::cout << "Username taken!\nInput username: ";
         std::cin >> username;
     }
+
     getline (std::cin, ignore);
     std::cout << "Input password: ";
     std::cin >> password;
@@ -25,6 +29,7 @@ void Person::createPerson()
 
 void Person::savePerson()
 {
+    //saves the user in the database
     std::ofstream file;
     file.open("users.db", std::ios::out | std::ios::app);
     file << username << " "
@@ -36,6 +41,7 @@ void Person::savePerson()
 
 void Person::addTrip()
 {
+    //adds a new trip to the user's database
     Trip t;
     t.addTrip();
     trips.push_back(t);
@@ -55,6 +61,7 @@ void Person::addTrip()
 
 void Person::printPerson()
 {
+    //used for the profile function
     std::cout << "\nUsername: " << username
               << "\nTrips:\n";
     for (Trip t : trips)
@@ -79,7 +86,7 @@ void Person::loadTrips()
             newTrip.loadTrip(file);
             trips.push_back(newTrip);
         }
-        trips.pop_back(); //sort that out like wtf
+        trips.pop_back();
         file.close();
     }
 
@@ -127,13 +134,11 @@ void Person::loadPersonalData(std::string _username, std::string _password, std:
 void Person::loadPerson(std::string _username, std::string _password, std::string _email)
 {
     this->loadPersonalData(_username, _password, _email);
-
     this->loadTrips();
     this->loadFriends();
     this->loadNotifications();
     
     
-    //maybe check here if notifications.size() == 0
     std::cout << "Hello, " << username 
               << "! You have " << notifications.size() 
               << " new notifications.\n Type view to see them.\n";
@@ -156,6 +161,7 @@ void Person::viewNotifications()
 
 void Person::eraseNotification(std::string toDelete)
 {
+    //deletes answered friend requests
     std::fstream file, temp;
     std::string line;
 
@@ -180,6 +186,7 @@ void Person::eraseNotification(std::string toDelete)
 
 void Person::eraseNotification()
 {
+    //deletes notifications for accepted friendships
     std::fstream file, temp;
     std::string line;
 
