@@ -11,14 +11,28 @@ void Trip::addTrip()
     getline(std::cin, destination);
     std::cout << "Input time period: ";
     getline(std::cin, timePeriod);
+    while(!Validation::validTimePeriod(timePeriod))
+    {
+        std::cout << "Invalid time period\nInput time period: ";
+        getline(std::cin, timePeriod);
+    }
     std::cout << "How would you grade this destination: ";
     std::cin >> grade;
+    while(!Validation::validGrade(grade))
+    {
+        std::cout << "Invalid grade!\nGrade: ";
+        std::cin >> grade;
+    }
     getline(std::cin, ignore);
     std::cout << "Input some notes: ";
     getline(std::cin, notes);
     std::cout << "Add some images: ";
     getline(std::cin, images);
-    getline(std::cin, ignore);
+    while (!Validation::validImages(images))
+    {
+        std::cout << "The app only supports .jpg .png and .jpeg format.\nImages: ";
+        getline(std::cin, images);
+    }
     //check images
 
     //save destination in the database of destinations

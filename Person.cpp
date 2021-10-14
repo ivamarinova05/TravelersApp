@@ -1,4 +1,5 @@
 #include "Person.h"
+#include "Validation.h"
 #include <iostream>
 #include <fstream>
 
@@ -7,6 +8,11 @@ void Person::createPerson()
     std::string ignore;
     std::cout << "Input username: ";
     std::cin >> username;
+    while(!Validation::uniqueUser(username))
+    {
+        std::cout << "Username taken!\nInput username: ";
+        std::cin >> username;
+    }
     getline (std::cin, ignore);
     std::cout << "Input password: ";
     std::cin >> password;
@@ -105,7 +111,7 @@ void Person::loadNotifications()
     _username.append("_notifications.txt");
     file.open(_username, std::ios::in);
     std::string message;
-    while(getline(file, message))
+    while(getline(file, message) && !message.empty())
     {
         notifications.push_back(message);
     } 
@@ -126,14 +132,10 @@ void Person::loadPerson(std::string _username, std::string _password, std::strin
     this->loadFriends();
     this->loadNotifications();
     
-    size_t count = 0;
-    if (notifications.size() != 0)
-    {
-        count = notifications.size() - 1;
-    }
+    
     //maybe check here if notifications.size() == 0
     std::cout << "Hello, " << username 
-              << "! You have " << count  
+              << "! You have " << notifications.size() 
               << " new notifications.\n Type view to see them.\n";
 }
 
@@ -188,7 +190,7 @@ void Person::eraseNotification()
     
     while(getline(file, line))
     {
-        if(line.substr(0,3) != "You")
+        if(line.substr(0,8) != "You and")
         {
             temp << line << "\n";
         }
