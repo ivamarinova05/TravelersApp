@@ -10,8 +10,5 @@ int main()
     CLR clr;
     clr.read();
     
-    //user.printPerson();
-
-
     return 0;
 }
